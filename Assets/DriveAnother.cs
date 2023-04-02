@@ -49,6 +49,22 @@ public class DriveAnother : MonoBehaviour
 
         Debug.DrawRay(this.transform.position, tankFoward, Color.green, 2);
         Debug.DrawRay(this.transform.position, fuelDirection, Color.red, 2);
+
+        //dot product
+        float dot = tankFoward.x * fuelDirection.x + tankFoward.y * fuelDirection.y;
+        float angle = Mathf.Acos(dot / (tankFoward.magnitude * fuelDirection.magnitude));
+
+        Debug.Log("Angle: " + angle * Mathf.Rad2Deg);
+        Debug.Log("Unity Angle: " + Vector3.Angle(tankFoward, fuelDirection));
+    }
+
+    Vector3 Cross(Vector3 v, Vector3 w)
+    {
+        float xMult = v.y * w.z - v.z * w.y;
+        float yMult = v.x * w.z - v.z * w.x;
+        float zMult = v.x * w.y - v.y * w.x;
+
+        return (new Vector3(xMult, yMult, zMult));
     }
 
     private void CalculateDistance()
