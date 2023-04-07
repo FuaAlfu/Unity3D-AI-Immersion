@@ -1,10 +1,6 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-/// <summary>
-/// 2023.3.31
-/// </summary>
 
 public class Drive : MonoBehaviour
 {
