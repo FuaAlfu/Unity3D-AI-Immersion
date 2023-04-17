@@ -487,13 +487,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1983937595}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.038, y: 1.523, z: 0.81}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.037989438, y: 0.44335878, z: 0.8353214}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1354003426666338540}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1354003426666338538
 PrefabInstance:
@@ -559,7 +559,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1354003426666338540 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2887154942990734001, guid: e57a33c6f3b0e4cb2a2af014c265b239, type: 3}
+  m_CorrespondingSourceObject: {fileID: 6880403096463785013, guid: e57a33c6f3b0e4cb2a2af014c265b239, type: 3}
   m_PrefabInstance: {fileID: 1354003426666338538}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1354003426666338541
@@ -576,7 +576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 59207907621397094, guid: 546e690cdd4d0584cbc5a2a16a152268, type: 3}
   turret: {fileID: 1983937595}
-  enemy: {fileID: 0}
+  enemy: {fileID: 620903246}
 --- !u!65 &1354003426666338542
 BoxCollider:
   m_ObjectHideFlags: 0
