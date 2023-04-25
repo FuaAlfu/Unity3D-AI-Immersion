@@ -42,6 +42,35 @@ public class PathMarker
 
 public class FindAStarPath : MonoBehaviour
 {
+    public Maze maze;
+    public Material closedMaterial;
+    public Material openMaterial;
+
+    List<PathMarker> open = new List<PathMarker>();
+    List<PathMarker> closed = new List<PathMarker>();
+
+    public GameObject start;
+    public GameObject end;
+    public GameObject pathP;
+
+    PathMarker goalNode;
+    PathMarker startNode;
+    PathMarker lastPos;
+    bool done = false;
+
+    void RemoveAllMarkers()
+    {
+        GameObject[] markers = GameObject.FindGameObjectsWithTag("marker");
+        foreach (GameObject m in markers)
+            Destroy(m);
+    }
+
+    void BeginSearch()
+    {
+        done = false;
+        RemoveAllMarkers();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
