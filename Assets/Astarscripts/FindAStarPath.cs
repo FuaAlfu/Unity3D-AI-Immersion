@@ -69,6 +69,23 @@ public class FindAStarPath : MonoBehaviour
     {
         done = false;
         RemoveAllMarkers();
+
+        List<MapLocation> locations = new List<MapLocation>();
+        for(int z = 1; z < maze.depth - 1; z++)
+            for (int x = 1; x < maze.depth - 1; x++)
+            {
+                if (maze.map[x, z] != 1)
+                    locations.Add(new MapLocation(x, z));
+            }
+        locations.Shuffle();
+
+        Vector3 startLocation = new Vector3(locations[0].x * maze.scale, locations[0].z * maze.scale);
+        startNode = new PathMarker(new MapLocation(locations[0].x, locations[0].z),0,0,0,
+            Instantiate(start,startLocation,Quaternion.identity),null);
+
+        Vector3 goalLocation = new Vector3(locations[1].x * maze.scale, locations[1].z * maze.scale);
+        goalNode = new PathMarker(new MapLocation(locations[1].x, locations[1].z), 0, 0, 0,
+            Instantiate(end, goalLocation, Quaternion.identity), null);
     }
 
     // Start is called before the first frame update
@@ -80,6 +97,6 @@ public class FindAStarPath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P)) BeginSearch();
     }
 }
