@@ -86,6 +86,22 @@ public class FindAStarPath : MonoBehaviour
         Vector3 goalLocation = new Vector3(locations[1].x * maze.scale, locations[1].z * maze.scale);
         goalNode = new PathMarker(new MapLocation(locations[1].x, locations[1].z), 0, 0, 0,
             Instantiate(end, goalLocation, Quaternion.identity), null);
+
+        open.Clear();
+        closed.Clear();
+        open.Add(startNode);
+        lastPos = startNode;
+    }
+
+    void Search(PathMarker thisnode)
+    {
+        if(thisnode.Equals(goalNode)) { done = true; return; } //goal has been found
+        foreach(MapLocation direction in maze.directions)
+        {
+            MapLocation neighbour = direction + thisnode.location;
+            if (maze.map[neighbour.x, neighbour.z] == 1) continue;
+            if (neighbour.x < 1 || neighbour.x >= maze.width || neighbour.z < 1 || neighbour.z >= maze.depth) continue;
+        }
     }
 
     // Start is called before the first frame update
