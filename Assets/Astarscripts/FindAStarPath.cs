@@ -101,7 +101,24 @@ public class FindAStarPath : MonoBehaviour
             MapLocation neighbour = direction + thisnode.location;
             if (maze.map[neighbour.x, neighbour.z] == 1) continue;
             if (neighbour.x < 1 || neighbour.x >= maze.width || neighbour.z < 1 || neighbour.z >= maze.depth) continue;
+            if (IsClosed(neighbour)) continue;
+
+            float G = Vector2.Distance(thisnode.location.ToVector(), neighbour.ToVector()) + thisnode.G;
+            float H = Vector2.Distance(neighbour.ToVector(), goalNode.location.ToVector());
+            float F = G + H;
+
+            GameObject pathBlock = Instantiate(pathP, new Vector3(neighbour.x * maze.scale, 0, neighbour.z * maze.scale),
+                                               Quaternion.identity);
         }
+    }
+
+    bool IsClosed(MapLocation marker)
+    {
+        foreach(PathMarker p in closed)
+        {
+            if (p.location.Equals(marker)) return true;
+        }
+        return false;
     }
 
     // Start is called before the first frame update
