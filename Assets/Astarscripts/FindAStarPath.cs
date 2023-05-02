@@ -95,6 +95,7 @@ public class FindAStarPath : MonoBehaviour
 
     void Search(PathMarker thisnode)
     {
+        if (thisnode != null) return;
         if(thisnode.Equals(goalNode)) { done = true; return; } //goal has been found
         foreach(MapLocation direction in maze.directions)
         {
@@ -109,7 +110,39 @@ public class FindAStarPath : MonoBehaviour
 
             GameObject pathBlock = Instantiate(pathP, new Vector3(neighbour.x * maze.scale, 0, neighbour.z * maze.scale),
                                                Quaternion.identity);
+
+            TextMesh[] values = pathBlock.GetComponentsInChildren<TextMesh>();
+            values[0].text = "G: " + G.ToString("0.00");
+            values[1].text = "H: " + H.ToString("0.00");
+            values[2].text = "F: " + F.ToString("0.00");
+
+            if (UpdateMarker(neighbour, G, H, F, thisnode))
+                open.Add(new PathMarker(neighbour, G, H, F, pathBlock, thisnode));
         }
+        open = open.OrderBy(p => p.F).ThenBy(n => n.H).ToList<PathMarker>();
+        PathMarker pm = (PathMarker)open.ElementAt(0);
+        closed.Add(pm);
+
+        open.RemoveAt(0);
+        pm.marker.GetComponent<Renderer>().material = closedMaterial;
+
+        lastPos = pm;
+    }
+
+    bool UpdateMarker(MapLocation pos, float g, float h, float f, PathMarker prt)
+    {
+        foreach(PathMarker p in open)
+        {
+            if(p.location.Equals(pos))
+            {
+                p.G = g;
+                p.H = h;
+                p.F = f;
+                p.parent = prt;
+                return true;
+            }
+        }
+        return false;
     }
 
     bool IsClosed(MapLocation marker)
@@ -131,5 +164,6 @@ public class FindAStarPath : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P)) BeginSearch();
+        if (Input.GetKeyDown(KeyCode.C)) Search(lastPos);
     }
 }
